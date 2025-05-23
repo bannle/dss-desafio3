@@ -16,7 +16,6 @@ RF231136
 - Alerta de éxito o error al interactuar con el carrito
 - Validación de stock antes de agregar
 - Modal con resumen del carrito
-- 
 ---
 
 ## 🛠️ Tecnologías utilizadas
