@@ -23,25 +23,25 @@
                 <p class="text-cl2 font-cur text-1xl">Productos al mejor precio</p>
             </div>
         </div>
-        <div class="flex items-start mb-10 gap-x-4 justify-end">
+        <div class="flex items-start mb-10 gap-x-4 justify-between">
             <button data-open-modal="carritoModal" class="bg-btn1 text-white px-4 py-2 rounded hover:bg-cl2 transition">
                 🛒 Ver Carrito ({{ count(session('carrito', [])) }})
                 <!-- llevar la cuenta de productos en carrito -->
             </button>
-            <form action="{{ route('pago.iniciar') }}" method="POST">
-            @csrf
-            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-                💳 Pagar
-            </button>
-        </form>
-
         </div>
 
         @if (session('success'))
-        <div id="alertaExito" class="fixed top-4 right-4 bg-exito text-cl5 p-3 rounded shadow-lg z-50 transition-opacity duration-500 opacity-100">
+        <div id="alertaExito" class="fixed top-4 right-4 bg-green-100 text-green-800 p-3 rounded shadow-lg z-50 transition-opacity duration-500 opacity-100">
             {{ session('success') }}
         </div>
         @endif
+
+        @if (session('error'))
+        <div id="alertaError" class="fixed top-4 right-4 bg-red-100 text-red-800 p-3 rounded shadow-lg z-50 transition-opacity duration-500 opacity-100 mt-16">
+            {{ session('error') }}
+        </div>
+        @endif
+
 
         <div class="text-2xl font-cur font-semibold mt-7">
 
@@ -113,8 +113,10 @@
             <div class="mt-4 text-right">
                 <p class="text-lg font-semibold">Total: ${{ number_format($total, 2) }}</p>
                 <div class="mt-2 flex gap-2 justify-end">
-                    <a href="{{ route('carrito.vaciar') }}" class="bg-btn1 text-white px-4 py-2 rounded hover:bg-cl2 transition">Vaciar</a>
-                    <button data-close-modal class="bg-cl2 text-white px-4 py-2 rounded hover:bg-btn2 transition">Cerrar</button>
+                    <a href="{{ route('carrito.vaciar') }}" class="bg-cl2 text-white px-4 py-2 rounded hover:bg-btn2 transition">Vaciar</a>
+                    <a href="{{ route('pago') }}" class="bg-btn1 text-white px-4 py-2 rounded hover:bg-cl2 transition">
+                💳 Pagar
+            </a>
                 </div>
             </div>
             @else

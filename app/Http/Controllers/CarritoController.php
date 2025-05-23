@@ -14,21 +14,20 @@ class CarritoController extends Controller
         $cantidad = (int)$request->stock;
 
         if ($cantidad < 1) {
-            return redirect()->back()->with('error', 'Cantidad inválida');
+            return redirect()->back()->with('error', '📦 Debes agregar al menos una unidad del producto.');
         }
 
         if ($cantidad > $producto->stock) {
-            return redirect()->back()->with('error', 'No hay suficiente stock disponible');
+            return redirect()->back()->with('error', '🚫 Lo sentimos, no hay suficiente stock disponible.');
         }
 
         $carrito = session()->get('carrito', []);
 
         if (isset($carrito[$producto->id])) {
-            // Ya existe, sumar cantidad
             $nuevaCantidad = $carrito[$producto->id]['cantidad'] + $cantidad;
 
             if ($nuevaCantidad > $producto->stock) {
-                return redirect()->back()->with('error', 'No puedes agregar más de lo disponible');
+                return redirect()->back()->with('error', '⚠️ Has alcanzado el máximo disponible para este producto.');
             }
 
             $carrito[$producto->id]['cantidad'] = $nuevaCantidad;
@@ -46,25 +45,24 @@ class CarritoController extends Controller
 
         session()->put('carrito', $carrito);
 
-        return redirect()->back()->with('success', 'Producto agregado al carrito');
+        return redirect()->back()->with('success', '🛍 Producto agregado a tu carrito.');
     }
 
-public function eliminar($id)
-{
-    $carrito = session()->get('carrito', []);
+    public function eliminar($id)
+    {
+        $carrito = session()->get('carrito', []);
 
-    if (isset($carrito[$id])) {
-        unset($carrito[$id]);
-        session()->put('carrito', $carrito);
+        if (isset($carrito[$id])) {
+            unset($carrito[$id]);
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect()->back()->with('success', '🗑 Producto eliminado del carrito.');
     }
 
-    return redirect()->back()->with('success', 'Producto eliminado del carrito');
-}
-
-public function vaciar()
-{
-    session()->forget('carrito');
-    return redirect()->back()->with('success', 'Carrito vaciado');
-}
-
+    public function vaciar()
+    {
+        session()->forget('carrito');
+        return redirect()->back()->with('success', '🧹 Tu carrito ha sido vaciado.');
+    }
 }

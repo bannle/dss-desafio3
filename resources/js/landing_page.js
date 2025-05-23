@@ -7,6 +7,14 @@ setTimeout(() => {
             setTimeout(() => alerta.remove(), 500);
         }
     }, 3000);
+setTimeout(() => {
+        const alerta = document.getElementById('alertaError');
+        if (alerta) {
+            alerta.style.transition = "opacity 0.5s";
+            alerta.style.opacity = "0";
+            setTimeout(() => alerta.remove(), 500);
+        }
+    }, 3000);
 
 
 //annimacion modal    

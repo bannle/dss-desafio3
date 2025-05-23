@@ -9,7 +9,7 @@ class ProductoController extends Controller
 {
     public function landing()
     {
-        $productos = Productos::with('categoria')->orderBy('categoria_id')->get();
+        $productos = Productos::with('categoria')->orderBy('categoria_id')->orderBy('precio', 'asc')->get();
         $agrupar = $productos->groupBy(fn($p) => $p->categoria->nombre ?? 'Sin categoría')->sortKeys();
 
 
