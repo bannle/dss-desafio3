@@ -59,7 +59,7 @@
 
                 <div>
                     <label class="block text-sm mb-1">Número de Tarjeta:</label>
-                    <input type="text" name="tarjeta" placeholder="1234-5678-9012-3456" value="{{ old('tarjeta') }}"
+                    <input type="text" name="tarjeta" placeholder="1234 5678 9012 3456" value="{{ old('tarjeta') }}"
                         class="w-full border border-subtitle rounded px-4 py-2 focus:ring-cl2 focus:border-cl2 bg-white text-cl4">
                 </div>
 

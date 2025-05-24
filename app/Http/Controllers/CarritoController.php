@@ -13,10 +13,6 @@ class CarritoController extends Controller
         $producto = Productos::findOrFail($request->id);
         $cantidad = (int)$request->stock;
 
-        if ($cantidad < 1) {
-            return redirect()->back()->with('error', '📦 Debes agregar al menos una unidad del producto.');
-        }
-
         if ($cantidad > $producto->stock) {
             return redirect()->back()->with('error', '🚫 Lo sentimos, no hay suficiente stock disponible.');
         }
